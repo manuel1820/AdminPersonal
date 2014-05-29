@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="shortcut icon" href="favicon.ico">
+
+      <title>Proyecto inicial</title>
+
+      <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="signin.css" rel="stylesheet">
+      <link href="navbar-static-top.css" rel="stylesheet">
+   </head>
+
+   <body>
+      <div class="navbar navbar-default navbar-static-top" role="navigation">
+         <div class="container">
+            <div class="navbar-header">
+               <a class="navbar-brand" href="#">Proyecto inicial</a>
+            </div>
+            <div class="navbar-collapse collapse">
+               <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Inicio</a></li>
+                  <li><a href="#eventos">Eventos</a></li>
+                  <li><a href="#zonas">Zonas</a></li>
+                  <li><a href="#mesas">Mesas</a></li>
+               </ul>
+            </div><!--/.nav-collapse -->
+         </div>
+      </div>
+
+
+
+      <div class="container">
+
+         <form action="send.php" method="POST" class="form-signin">
+            <h2 class="form-signin-heading">Introduce los datos</h2>
+            <div class="form-group">
+               <label for="eventoCodigo">Evento codigo</label>
+               <input type="text" class="form-control" name="eventoCodigo" id="eventoCodigo" placeholder="Codigo para el evento">
+            </div>
+            <div class="form-group">
+               <label for="descripcion">Descripción del evento</label>
+               <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción">
+            </div>
+            <div class="form-group">
+               <label for="lugar">Lugar</label>
+               <input type="text" class="form-control" name="lugar" id="lugar" placeholder="Lugar donde se realizará">
+            </div>
+            <div class="col-xs-6">
+               <label for="fechaEvento">Fecha del evento</label>
+               <input type="date" class="form-control" name="fechaEvento" id="fechaEvento">
+            </div>
+            <div class="col-xs-6" >
+               <label for="fechaVenta">Fecha inicio venta</label>
+               <input type="date" class="form-control" name="fechaVenta" id="fechaVenta">
+            </div>
+            <div class="botonEnvio">
+               <input type="submit" value="Enviar" class="btn btn-primary" />
+            </div>
+         </form>
+
+      </div> 
+
+      <div id="respuesta">
+      </div>
+
+      <script>
+         $(function() {
+            $("#submit").click(function() {
+               var url = "send.php"; // El script a dónde se realizará la petición.
+               $.ajax({
+                  type: "POST",
+                  url: url, data: $("#evento").serialize(), // Adjuntar los campos del formulario enviado.
+                  success: function(data)
+                  {
+                     $("#respuesta").html(data); // Mostrar la respuestas del script PHP.
+                  }
+               });
+               return false; // Evitar ejecutar el submit del formulario.
+            });
+         });
+
+      </script>
+      <script src="bootstrap/js/jquery.js"></script>
+      <script src="bootstrap/js/bootstrap-datepicker.js"></script>
+      <script  src="bootstrap/js/bootstrap-datepicker.es.js" ></script>
+      <script type="text/javascript"></script>
+
+   </body>
+</html>
